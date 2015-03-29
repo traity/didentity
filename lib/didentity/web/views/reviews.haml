@@ -1,0 +1,16 @@
+- if logged_in?
+  %a.btn.secondary{href: '/auth/ebay'} Import reviews from Ebay
+- else
+  %a.btn.primary{href: '/auth/traity'} Connect with Traity
+  or import sample review
+
+%form{method: 'POST', action: '/store_reviews'}
+  %div
+    %label
+      Private key:
+      %input.field-input{value: @random_priv, name:'random_privs[]'}
+  %div
+    %textarea.reviews{name: 'signed_reviews'}= pretty_json(@signed_reviews)
+    %input{value: @random_priv, name:'random_privs[]', type: 'hidden'}
+  %div
+    %button.btn.secondary{type: 'submit', } Store

@@ -1,0 +1,19 @@
+%h2 Great!
+%h4 Now that you have connected with Traity, select one of these providers to import your reviews:
+
+%ul
+  %li
+    %a{href: traity_url('/authentication/ebay?postMessage=true'), target: '_blank', onclick:'window.provider="ebay";'} Ebay
+  %li
+    %a{href: traity_url('/authentication/linkedin?postMessage=true'), target: '_blank', onclick: 'window.provider="linkedin";'} Linkedin
+
+:javascript
+  window.provider = '';
+
+  window.onmessage = function(e) {
+    document.location = "#{web_path('/reviews/')}" + provider;
+  };
+
+
+%div
+  %a{href: web_path('/')} « Back

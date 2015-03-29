@@ -1,0 +1,84 @@
+@import "compass"
+@import "mixins"
+@import "variables"
+
+*
+  +box-sizing(border-box)
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
+html
+  font-size: 62.5%
+  height: 100%
+
+body
+  font-family: 'Muli'
+  font-size: 1.3rem
+  height: 100%
+
+a
+  color: $gray-dark
+  text-decoration: none
+
+ul
+  margin: 0
+  padding: 0
+
+input, textarea
+  +appearance(none)
+  border: none
+  outline: none
+
+h1, h2, h3, h4, h5, h6, p
+  font-weight: 400
+  margin: 0
+
+.page-content
+  background: $gray-lightest
+  padding-bottom: $base-unit * 5
+  min-height: 100%
+
+.wrapper
+  margin: 0 auto
+  position: relative
+  width: $box-unit * 13 + $base-unit * 12
+
+.row
+  +clearfix
+  margin: 0 $base-unit * -.5
+
+$grids: 8 9 13
+@each $grid in $grids
+  @for $col from 1 through $grid
+    .col-#{$col}-#{$grid}
+      width: ((100/$grid)*$col)*1%
+
+[class*='col-']
+  float: left
+  padding: 0 $base-unit * .5
+
+.row-pad
+  padding: $base-unit 0 $base-unit $base-unit
+  & > [class*='col-']:last-of-type
+    padding-right: $base-unit
+
+.clearfix
+  +clearfix
+
+.hide
+  display: none
+
+.brick-layout
+  list-style: none
+  &.margin-top
+    margin-top: $base-unit
+
+.brick
+  float: left
+  opacity: 0
+  transition: opacity .2s ease-in
+  &.revealed
+    opacity: 1
+
+[ng-click], [data-ng-click]
+  cursor: pointer

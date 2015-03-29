@@ -1,0 +1,190 @@
+@import "compass"
+@import "icons"
+@import "variables"
+
+$header-item-height: $base-unit * 4.5
+$header-big-item-height: $base-unit * 8.4
+
+.main-header
+  +box-shadow(0 1px 0 rgba(0,0,0,0.1))
+  position: relative
+  z-index: $index-low
+  background: white
+  &.big
+    .main-logo
+      height: $base-unit * 4.3
+      margin-bottom: $base-unit * 2.3
+      margin-top: $base-unit * 2.4
+      padding: 0
+      width: $base-unit * 9
+    .main-search
+      margin-left: $base-unit * 5
+      padding-bottom: $base-unit * 1.9
+      padding-top: $base-unit * 2
+
+.main-logo
+  float: left
+  height: $header-item-height
+  padding: $base-unit * .6 0 $base-unit * .5 0
+  width: $base-unit * 7.1
+  & > img
+    width: 100%
+
+.main-menu
+  float: left
+  height: $header-item-height
+  list-style: none
+  margin-left: $base-unit * 5.6
+
+.main-menu-list-item
+  color: $gray-dark
+  float: left
+  font-size: $base-unit * 1.3
+  line-height: $base-unit * 4.5
+
+.main-menu-item
+  display: inline-block
+  height: $header-item-height
+  margin-right: $base-unit * 2.8
+  padding-left: $base-unit * 3.2
+  position: relative
+  &:before
+    font-size: $base-unit * 2.8
+    left: 0
+    line-height: $base-unit * 4.5
+    position: absolute
+
+.main-menu-item-compass
+  @extend .icon-compass
+  &:before
+    font-size: $base-unit * 2.7
+
+.main-menu-item-who-to-trust
+  @extend .icon-trusting
+  &:before
+    font-size: $base-unit * 2.1
+
+.main-menu-item-guy
+  @extend .icon-guy
+  padding-left: $base-unit * 2.5
+  &:before
+    font-size: $base-unit * 2.4
+
+.main-search
+  float: left
+  position: relative
+  margin-left: $base-unit * 3
+  color: $gray-dark
+
+.main-search-input
+  background-color: $gray-light
+  +border-radius($base-unit * .5)
+  font-size: $base-unit * 1.3
+  height: $base-unit * 3
+  margin-bottom: $base-unit * .8
+  margin-top: $base-unit * .7
+  padding-left: $base-unit
+  padding-right: $base-unit * 3.7
+  width: $base-unit * 29.2
+
+.main-search-button
+  @extend .icon-search
+  font-size: $base-unit * 2
+  position: absolute
+  line-height: 1
+  right: 0
+  top: 50%
+  margin-top: -$base-unit * 1.3
+
+.main-notification-icon
+  @extend .icon-bell
+  display: inline-block
+  font-size: $base-unit * 2.6
+  height: $header-item-height
+  margin-left: $base-unit * 3.8
+  position: relative
+  &:before
+    top: $base-unit * .5
+    position: relative
+  &.active:after
+    +border-radius($base-unit * .6)
+    background: $red-light
+    border: $base-unit * .2 solid white
+    content: ''
+    height: $base-unit * .8
+    position: absolute
+    right: $base-unit * -.2
+    top: $base-unit * 1.2
+    width: $base-unit * .8
+
+.main-notifications-list
+  right: 5 * $base-unit
+  width: 31 * $base-unit
+
+.main-user-profile-icon
+  float: right
+  height: $header-item-height
+  & > img
+    +border-radius($base-unit * .5)
+    border: 1px solid $gray-light
+    height: $base-unit * 3
+    margin-top: $base-unit * .7
+    width: $base-unit * 3
+
+.header-dropdown-menu
+  +box-shadow(0px 2px 4px 0px rgba(0,0,0,0.15))
+  background: white
+  border-bottom-left-radius: 4px
+  border-bottom-right-radius: 4px
+  font-size: $base-unit * 1.4
+  list-style: none
+  position: absolute
+  top: $header-item-height
+  z-index: $index-medium
+
+.user-menu
+  right: 0
+
+.user-menu-item
+  color: black
+  display: block
+  line-height: $base-unit * 1.8
+  padding: $base-unit $base-unit*3 $base-unit $base-unit*3.6
+  position: relative
+  &:hover
+    background-color: $traity-blue-light
+    color: white
+    &:before
+      color: white
+  &:before
+    color: $traity-blue-light
+    font-size: $base-unit * 2
+    left: $base-unit * .7
+    position: absolute
+    top: $base-unit * .9
+    text-align: center
+    width: $base-unit * 2.2
+  &.item-settings
+    @extend .icon-screw
+  &.item-share-profile
+    @extend .icon-share
+  &.item-improve-reputation
+    @extend .icon-ray
+    border-top: 1px solid $gray-light
+  &.item-what-to-do
+    @extend .icon-help
+  &.item-give-badges
+    @extend .icon-badge
+  &.item-rate-traity
+    @extend .icon-empty-star
+  &.item-sign-out
+    @extend .icon-exit
+    border-top: 1px solid $gray-light
+
+.main-header-login-buttons
+  float: right
+  height: $header-big-item-height
+  padding-bottom: 2.3 * $base-unit
+  padding-top: 2.4 * $base-unit
+  & > .main-header-login
+    margin-right: $base-unit

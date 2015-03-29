@@ -1,0 +1,327 @@
+@import "compass"
+@import "mixins"
+@import "variables"
+
+.module
+  +border-radius(4px)
+  background: white
+  border: 1px solid $blue-gray-light
+  &.padding
+    padding: $base-unit
+  &.margin-top
+    margin-top: $base-unit
+
+.module-title
+  font-family: $font-montserrat
+  font-size: 1.8 * $base-unit
+  &.margin-bottom
+    margin-bottom: $base-unit
+  &.padding
+    padding: $base-unit $base-unit 0
+
+.module-title-small
+  font-family: $font-montserrat
+  font-size: 1.5 * $base-unit
+  &.margin-bottom
+    margin-bottom: $base-unit
+  &.padding
+    padding: $base-unit $base-unit 0
+
+.module-subtitle
+  font-family: $font-montserrat
+  font-size: 1.3 * $base-unit
+  margin-bottom: $base-unit
+
+.module-paragraph
+  font-size: 1.3 * $base-unit
+
+.list
+  position: relative
+  & > ul
+    list-style: none
+    & > li:not(:last-child)
+      border-bottom: 1px solid $blue-gray-light
+
+.list-header
+  border-bottom: 1px solid $blue-gray-light
+  font-family: $font-montserrat
+  font-size: $base-unit * 1.3
+  line-height: $base-unit * 4.5
+  margin: 0
+  padding: 0 $base-unit
+
+.list-header-more
+  color: $gray
+  font-size: $base-unit * 1.3
+  line-height: $base-unit * 4.5
+  position: absolute
+  right: $base-unit
+  top: 0
+  &:hover
+    color: $gray-dark
+
+.list-item
+  display: table
+  width: 100%
+  & > .list-column
+    display: table-cell
+    vertical-align: middle
+    padding-right: $base-unit
+  &.padding
+    padding: $base-unit
+
+$list-text-item-height: $base-unit * 3.7
+.list-text-header
+  border-bottom: 1px solid $blue-gray-light
+  font-family: $font-montserrat
+  font-size: $base-unit * 1.3
+  line-height: $list-text-item-height
+  margin: 0
+  padding: 0 $base-unit
+
+.list-text-header-more
+  color: $gray
+  font-size: $base-unit * 1.3
+  line-height: $list-text-item-height
+  position: absolute
+  right: $base-unit
+  top: 0
+  &:hover
+    color: $gray-dark
+
+.list-text-item
+  font-size: $base-unit * 1.3
+  line-height: $list-text-item-height
+  padding: 0 $base-unit
+
+// Used for the directive image cover
+.image-cover
+  position: absolute
+  top: 50%
+  left: 50%
+  @include transform(translate(-50%, -50%))
+  visibility: hidden
+
+// Used for the directive partial badge
+.badge-icon-partial
+  display: inline-block
+  position: relative
+  .canvas-element
+    left: 0
+    position: absolute
+    top: 0
+
+// User card
+$reputation-badge-width: $base-unit * 3.6
+$user-card-header-padding: $base-unit * .7
+
+.user-card
+  padding: $base-unit * .6
+
+.user-card-header
+  +border-radius(4px)
+  border: 1px solid $gray-light
+  margin-bottom: $base-unit * .6
+  overflow: hidden
+  position: relative
+  width: 100%
+
+.user-card-image
+  position: relative
+  min-height: 150px
+  width: 100%
+  & > img
+    display: block
+    width: 100%
+
+.user-card-info
+  bottom: 0
+  color: white
+  left: 0
+  padding-bottom: $base-unit*.6
+  padding-left: $base-unit*.6
+  padding-right: $reputation-badge-width + $user-card-header-padding*2
+  padding-top: $base-unit*.6
+  position: absolute
+  right: 0
+  text-shadow: 0px 1px 4px rgba(0,0,0,0.50)
+  &:before
+    +background($user-card-gradient)
+    bottom: 0
+    content: ''
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
+
+.user-card-name
+  font-family: $font-montserrat
+  font-size: $base-unit * 1.6
+  line-height: $base-unit * 1.9
+  margin: 0
+  position: relative
+
+.user-card-location
+  color: $gray-light
+  font-size: $base-unit * 1.3
+  line-height: 1.5
+  position: relative
+
+.user-card-reputation
+  bottom: $user-card-header-padding
+  height: $reputation-badge-width
+  position: absolute
+  right: $user-card-header-padding
+  width: $reputation-badge-width
+
+.user-card-interest-tag-list
+  +border-radius(4px)
+  background-color: $gray-lightest
+  color: $gray-darkest
+  margin-bottom: $base-unit * .6
+  padding: $base-unit * .5
+  & > li
+    display: inline
+
+.user-card-interest-tag-link
+  font-size: $base-unit * 1.2
+  &:hover
+    color: black
+
+// People could trust you lists
+.people-could-trust-you-item-picture
+  height: $base-unit * 8
+  width: $base-unit * 8
+  position: relative
+.people-could-trust-you-item-picture-wrapper
+  +background-image(asset-url('avatar-default@2x.png'))
+  +background-size(100%)
+  +border-radius(5px)
+  border: 1px solid $gray-light
+  display: block
+  height: $base-unit * 6
+  margin: $base-unit $base-unit $base-unit
+  overflow: hidden
+  width: $base-unit * 6
+  & > img
+    border-radius: 5px
+
+.people-could-trust-you-item-name
+  color: black
+  font-family: $font-montserrat
+  font-size: $base-unit * 1.6
+  margin: 0
+  &.small
+    font-size: $base-unit * 1.3
+
+.people-could-trust-you-item-location
+  color: $gray
+  font-size: $base-unit * 1.3
+  margin: 0
+
+.people-could-trust-you-item-button
+  text-align: center
+
+// Default image for everybody
+.avatar
+  +background-image(asset-url('avatar-default@2x.png'))
+  +background-size(100%)
+
+// Sidebar list elements
+.sidebar-photo-list-item
+  padding: $base-unit
+
+.sidebar-photo-list-picture
+  +background-size(cover)
+  border-radius: 4px
+  border: 1px solid $blue-gray-light
+  height: 4 * $base-unit
+  margin: $base-unit
+  text-align: center
+  width: 4 * $base-unit
+
+.sidebar-photo-list-name
+  color: $gray-dark
+  font-family: $font-montserrat
+  font-size: 1.3 * $base-unit
+  padding-left: $base-unit
+
+.sidebar-photo-list-team
+  color: $gray-dark
+  font-size: 1.1 * $base-unit
+  padding-left: $base-unit
+
+.sidebar-people-photo-list-header
+  font-family: $font-montserrat
+  font-size: 1.3 * $base-unit
+  margin: $base-unit 0 $base-unit $base-unit
+
+.sidebar-people-photo-list
+  list-style: none
+  padding: 0 .25*$base-unit .25*$base-unit .25*$base-unit
+
+.sidebar-people-photo-list-item
+  float: left
+  padding: .25 * $base-unit
+  width: 33.33333%
+
+.sidebar-people-photo-list-item-wrapper
+  border-radius: 4px
+  height: 8.4 * $base-unit
+  overflow: hidden
+  position: relative
+
+.sidebar-people-photo-list-item-image
+  height: auto
+  width: 100%
+
+.sidebar-people-photo-list-item-name
+  bottom: 0
+  color: white
+  font-family: $font-montserrat
+  font-size: 1.2 * $base-unit
+  left: 0
+  padding: .5 * $base-unit
+  position: absolute
+  right: 0
+  &:before
+    +background($user-card-gradient)
+    bottom: 0
+    content: ''
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
+  & > span
+    position: relative
+
+.no-results-wrapper
+  +border-radius(4px)
+  background-color: $gray-light
+  border: 1px solid $blue-gray-light
+  text-align: center
+  padding: 2*$base-unit
+  width: 100%
+  &.margin-top
+    margin-top: $base-unit
+
+.no-results-sad-face
+  +background-image(asset-url('svg/sad-face.svg'))
+  +background-size(100%)
+  display: block
+  height: 7 * $base-unit
+  margin: 0 auto
+  width: 7 * $base-unit
+
+.no-results-title
+  color: $gray
+  font-family: $font-montserrat
+  font-size: 2.2 * $base-unit
+  margin: $base-unit*1.8 auto
+  max-width: 75%
+
+.no-results-legend
+  color: $gray
+  font-size: 1.6 * $base-unit
+  margin: 0 auto
+  max-width: 75%

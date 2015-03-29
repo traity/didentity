@@ -1,0 +1,31 @@
+%h2 Congrats! The sample reviews have been sent to the blockchain
+%p
+  Please note that it can take a while to confirm the transaction. Namecoin requires 12 confirmations to consider it a valid registration
+
+%h4 Signed review:
+%pre.reviews
+  %code= pretty_json(@signed_reviews)
+
+%h4 Stored review:
+%pre
+  %code= pretty_json(@stored_reviews[:value])
+
+
+%dl
+  %dt Private key:
+  %dd
+    %code=@random_priv
+
+  %dt Address:
+  %dd
+    %code=@random_address
+
+  %dt Identifier:
+  %dd
+    %code=@stored_reviews[:identifier]
+
+
+-# %pre
+-#   %code= pretty_json(@transaction)
+%a{href: "https://explorer.namecoin.info/tx/#{@transaction[:txid]}", target: '_blank'} Click here to see transaction in Namecoin explorer
+

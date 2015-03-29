@@ -1,0 +1,23 @@
+- if @reviews[:reviews].empty?
+  %p.center
+    Your reviews are being imported, please wait.
+  .spinner
+
+- else
+  %h2 Congrats! Your reviews have been sent to the blockchain
+  %p
+    Please note that it can take a while to confirm the transaction. Namecoin requires 12 confirmations to consider it a valid registration
+  %pre.reviews
+    = pretty_json(@reviews[:reviews])
+
+%dl
+  %dt Address:
+  %dd
+    %code=@reviews[:address]
+
+  %dt Identifier:
+  %dd
+    %code=@reviews[:identifier]
+
+%p
+  %a{href: web_path('/')} « Back

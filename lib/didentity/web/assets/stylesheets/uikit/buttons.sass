@@ -1,0 +1,231 @@
+@import "compass"
+@import "mixins"
+@import "variables"
+
+=primary
+  +background($primary-button-gradient)
+  border: 1px solid $traity-blue-dark
+  color: white
+  &:hover
+    +background($primary-button-gradient-hover)
+  &:active
+    +box-shadow($button-primary-active-shadow)
+
+=secondary
+  +background($secondary-button-gradient)
+  border: 1px solid $blue-gray-light
+  color: $gray-darkest
+  min-width: $base-unit * 9.6
+  &:hover
+    +background($secondary-button-gradient-hover)
+  &:active
+    +background($secondary-button-gradient-hover)
+    +box-shadow($button-secondary-active-shadow)
+
+=alert
+  background: $red-light
+  border: 1px solid $red
+  color: white
+  &:active
+    +box-shadow($button-alert-active-shadow)
+
+=claim
+  +background($claim-button-gradient)
+  border: 1px solid $claim-dark
+  color: black
+
+=primary-empty
+  background: none
+  border: 1px solid $traity-blue
+  color: $traity-blue
+
+=disabled
+  background-color: $gray-light
+  border: 1px solid $blue-gray-light
+  color: $blue-gray
+
+=btn-icon($content)
+  padding-left: $base-unit*4
+  position: relative
+  +icon($content)
+  &:before
+    font-size: $base-unit * 2
+    left: $base-unit * 0.5
+    line-height: $base-unit * 2
+    margin-top: -$base-unit
+    position: absolute
+    top: 50%
+  &.small
+    padding-left: $base-unit*2.9
+    &:before
+      font-size: $base-unit * 1.5
+
+// Widths for buttons
+$find-people-to-trust-width: $base-unit*23
+$give-badge-button-width: $base-unit * 15
+$trust-button-small-width: $base-unit*9.6
+$trust-button-toy-width: $base-unit * 5.8
+$trust-button-width: $base-unit*12
+
+.btn-text
+  display: none
+
+.btn
+  +border-radius(5px)
+  display: inline-block
+  font-family: $font-montserrat
+  font-size: $base-unit * 1.6
+  line-height: $base-unit * 3.5
+  padding: 0 $base-unit * .6
+  outline: none
+  text-align: center
+  &.small
+    line-height: $base-unit * 3
+    font-size: $base-unit * 1.3
+  &.toy
+    font-size: $base-unit * 1.2
+    line-height: $base-unit * 2.3
+    &.stretch
+      min-width: 7 * $base-unit
+  &.muli
+    font-family: $font-muli
+    line-height: $base-unit * 3.7
+
+  &.primary
+    +primary
+    min-width: $base-unit * 9.4
+
+  &.secondary
+    +secondary
+    min-width: $base-unit * 9.4
+
+  &.claim
+    +claim
+    min-width: $base-unit * 9.4
+
+  &.trust
+    +btn-icon('n')
+    +secondary
+    width: $trust-button-width
+    &:before
+      color: $traity-blue
+    &.small
+      width: $trust-button-small-width
+    &.toy
+      min-width: 0
+      padding: 0
+      width: $trust-button-toy-width
+      &:before
+        content: ''
+    & > .trust-text
+      display: inline
+
+  &.trust-pending
+    +btn-icon('k')
+    +disabled
+    width: $trust-button-width
+    &.small
+      width: $trust-button-small-width
+
+  &.trusting
+    +primary
+    +btn-icon('k')
+    width: $trust-button-width
+    &.small
+      width: $trust-button-small-width
+    &.toy
+      min-width: 0
+      padding: 0
+      width: $trust-button-toy-width
+      &:before
+        content: ''
+    & > .trusting-text
+      display: inline
+    &:hover:not(.cancel-hover-style):not(.toy)
+      @extend .stop-trusting
+
+  &.stop-trusting
+    +alert
+    padding: 0
+    width: $trust-button-width
+    &.small
+      width: $trust-button-small-width
+    &:before
+      content: ''
+    & > .trusting-text
+      display: none
+    & > .stop-trusting-text
+      display: inline
+
+  &.find-people-to-trust
+    +btn-icon('n')
+    +secondary
+    width: 100%
+
+
+  &.find-more-about
+    +btn-icon('N')
+    +secondary
+    width: $find-people-to-trust-width
+
+  &.facebook-connect
+    +background($facebook-button-gradient)
+    +btn-icon('S')
+    color: white
+    padding-left: 3.5*$base-unit
+    &:before
+      font-size: 3.3*$base-unit
+      left: $base-unit
+      margin-top: -1.1*$base-unit
+
+  &.google-connect
+    +background($google-button-gradient)
+    +btn-icon('R')
+    color: white
+    padding-left: 3.5*$base-unit
+    &:before
+      font-size: 3.3*$base-unit
+      left: $base-unit
+      margin-top: -1.1*$base-unit
+
+  &.give-badge
+    +btn-icon('o')
+    +primary-empty
+    padding-left: $base-unit*3
+    width: $give-badge-button-width
+    &:before
+      font-size: $base-unit * 3
+    &:hover
+      +background($primary-button-gradient)
+      border: 1px solid $traity-blue-dark
+      color: white
+    &:active
+      +background($primary-button-gradient)
+      +box-shadow($button-primary-active-shadow)
+      border: 1px solid $traity-blue-dark
+      color: white
+    &.small
+      padding-left: 2.5*$base-unit
+      padding-right: 1.2*$base-unit
+      width: 9.4rem
+      &:before
+        font-size: $base-unit * 2
+
+  &.facebook-dark-bck
+    background: none
+    border: 1px solid white
+    color: white
+    font-family: $font-muli
+    line-height: $base-unit * 3
+    width: $base-unit * 15.4
+    &:hover
+      background: white
+      color: black
+
+.no-style
+  background: none
+  border: 0
+  outline: none
+
+[disabled="disabled"]
+  opacity: .5

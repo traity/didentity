@@ -1,0 +1,28 @@
+%h2 Demo
+%h5 Sample reviews
+
+- if flash[:errors]
+  %h3.error Error!
+  %pre.error
+    %code=flash[:errors]
+
+%form{method: 'post', action: web_path('/reviews')}
+  %div
+    %label Private key:
+    %code.sort=@random_priv
+  %div
+    %label  Address:
+    %code=@random_address
+
+  %textarea.reviews{name:'reviews'}=@sample_reviews
+
+  %div
+    %input{type: 'hidden', name:'random_priv', value: @random_priv}
+    %input{type: 'submit', value: 'Store this sample review'}  
+  %div
+    or
+    %a{href: web_path('/auth/traity')} Connect with Traity 
+    to import your own reviews from different providers
+
+
+= haml :'how_it_works'

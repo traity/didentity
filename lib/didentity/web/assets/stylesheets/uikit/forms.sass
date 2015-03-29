@@ -1,0 +1,31 @@
+@import "compass"
+@import "variables"
+
+.field-input
+  +border-radius(5px)
+  background: white
+  border: 1px solid $blue-gray-light
+  display: inline-block
+  font-size: 1.5*$base-unit
+  margin: .5*$base-unit  0
+  outline: none
+  padding: .8*$base-unit $base-unit
+  width: 100%
+  &:focus
+    outline-width: 0
+  &.error
+    border: solid 1px $red
+
+.field-input-error
+  color: $red
+  font-family: $font-montserrat
+  padding: 0 .5*$base-unit
+  text-align: left
+
+.two-field-input-row
+  margin: 0 -.5*$base-unit
+
+.two-field-input-row-column
+  float: left
+  padding: 0 .5*$base-unit
+  width: 50%
