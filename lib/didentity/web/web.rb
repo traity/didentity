@@ -35,10 +35,6 @@ module Didentity
       provider :traity, Didentity::Config.traity[:app_key],
                         Didentity::Config.traity[:app_secret],
                         client_options: Didentity::Config.traity[:client_options]
-
-      provider :ebay,   Didentity::Config.ebay[:runame], Didentity::Config.ebay[:devid],
-                        Didentity::Config.ebay[:appid],  Didentity::Config.ebay[:certid],
-                        0, Didentity::Config.ebay[:env], OmniAuth::Strategies::Ebay::AuthType::Simple
     end
 
     configure :development do
