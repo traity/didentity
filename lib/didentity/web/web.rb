@@ -90,15 +90,15 @@ module Didentity
     end
 
     def ledger
-      @ledger ||= Didentity.ledger(Config.didentity[:endpoint_url])
+      @ledger ||= Didentity.ledger(Didentity::Config.didentity[:endpoint_url])
     end
 
     def namecoin_client
-      @namecoin_client ||= Didentity::NamecoinClient.new(Config.didentity[:endpoint_url])
+      @namecoin_client ||= Didentity::NamecoinClient.new(Didentity::Config.didentity[:endpoint_url])
     end
 
     def traity_api_client
-      @api_client ||= Didentity::ApiClient.new(Config.traity[:client_options][:site])
+      @api_client ||= Didentity::ApiClient.new(Didentity::Config.traity[:client_options][:site])
     end
 
     def reviews
