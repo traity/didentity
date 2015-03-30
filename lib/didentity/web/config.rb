@@ -7,7 +7,7 @@ module Didentity
   module Config
     extend self
 
-    def didendity
+    def didentity
       {
         endpoint_url: ENV['DIDENTITY_ENDPOINT_URL']
       }
