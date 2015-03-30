@@ -52,7 +52,7 @@ class Didentity::Ledger
 
   private
   def stored_value(hash, priv)
-    { hash: hash, signature: sign(hash, user_priv, false) }
+    { hash: hash, signature: sign(hash, priv, false) }
   end
 
   def sign_review(review, privs)
