@@ -55,8 +55,7 @@ module Didentity
         @random_address = ledger.address_from_priv(@random_priv)
         @signed_reviews = ledger.sign_reviews(reviews, [@random_priv])
         @stored_reviews = ledger.store_reviews('sample', reviews, @random_priv)
-        # @transaction    = namecoin_client.call(:gettransaction, @stored_reviews[:response][:result])[:result]
-        @transaction    = {}
+        @transaction    = namecoin_client.call(:gettransaction, @stored_reviews[:response][:result])[:result]
         haml :'sample_reviews'
       rescue Didentity::ModelError => e
         flash[:errors] = e.message
