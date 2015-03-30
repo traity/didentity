@@ -4,8 +4,6 @@ require 'sinatra/content_for'
 require 'haml'
 require 'omniauth'
 require 'omniauth-traity'
-require 'omniauth-ebay'
-require 'omniauth-linkedin'
 require 'rack-flash'
 require 'rack/ssl-enforcer'
 require 'rack/session/cookie'
@@ -96,15 +94,15 @@ module Didentity
     end
 
     def ledger
-      @ledger ||= Didentity.ledger(ENV['DIDENTITY_ENDPOINT_URL'])
+      @ledger ||= Didentity.ledger(Config.didentity[:endpoint_url])
     end
 
     def namecoin_client
-      @namecoin_client ||= Didentity::NamecoinClient.new(ENV['DIDENTITY_ENDPOINT_URL'])
+      @namecoin_client ||= Didentity::NamecoinClient.new(Config.didentity[:endpoint_url])
     end
 
     def traity_api_client
-      @api_client ||= Didentity::ApiClient.new('http://api.traity.dev')
+      @api_client ||= Didentity::ApiClient.new(Config.traity[:client_options][:site])
     end
 
     def reviews

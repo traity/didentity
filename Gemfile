@@ -16,8 +16,6 @@ gem 'closure-compiler',       '1.1.10'
 gem 'yui-compressor',         '0.12.0'
 gem 'omniauth'
 gem 'omniauth-traity'
-gem 'omniauth-ebay'
-gem 'omniauth-linkedin'
 gem 'rack-ssl-enforcer'
 
 group :development, :test do

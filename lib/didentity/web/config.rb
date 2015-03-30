@@ -7,7 +7,10 @@ module Didentity
   module Config
     extend self
 
-    def app_prefix
+    def didendity
+      {
+        endpoint_url: ENV['DIDENTITY_ENDPOINT_URL']
+      }
     end
 
     def traity
@@ -16,19 +19,9 @@ module Didentity
         app_secret: ENV['TRAITY_APP_SECRET'],
         host:       (ENV['TRAITY_HOST'] || 'https://traity.com'),
         client_options: {
-          site: ENV['TRAITY_CLIENT_SITE'],
+          site: (ENV['TRAITY_CLIENT_SITE'] || 'https://api.traity.com'),
           authorize_url: ENV['TRAITY_CLIENT_AUTHORIZE_URL']
         }
-      }
-    end
-
-    def ebay
-      {
-        runame: ENV['EBAY_RUNAME'],
-        devid:  ENV['EBAY_DEVID'],
-        appid:  ENV['EBAY_APPID'],
-        certid: ENV['EBAY_CERTID'],
-        env:    (ENV['EBAY_ENV'] || :sandbox).to_sym
       }
     end
   end
