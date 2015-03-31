@@ -54,6 +54,10 @@
 
   Having this signature, we could easily detect if the text was modified or not:
 
+      Bitcoin.network = :namecoin
+      payload = Digest::SHA2.hexdigest(JSON.parse(review).to_json)
+      puts Bitcoin.verify_message(address, signature, payload)
+
 
   Now, because this document has sensitive data that we might not want to store in the blockchain, we will generate a hash for
   the list of reviews and that is what we will store: `9bd4eda087f1dd60448c808bac0e713e2acf322ee97a02a15dfbcc8fc7145b9f`
@@ -81,5 +85,3 @@
   `<address> + "_" + hash160("reviews_" + <provider> + "_" + <private_key>)`
   which generates the following identifier for the provider 'airbnb' and:
   `MwesPafEAcvxD2cPjMAFMVfpT26Lwkjfpv_67046ab4b5629a1e33993d5570a31cb3075f3a5`
-
-  
