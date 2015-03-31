@@ -22,7 +22,7 @@
         ]
       }]
 
-  In order to sign the document, we need at least one private key. 
+  In order to sign the document, we need at least one private key.
   Using the example private key `e2a4188f9adc09c0582c9740741117e0ada281c56e53164c9d7ef1fe882ccd95` we would generate the following document:
 
       [
@@ -51,14 +51,16 @@
       ]
 
   The signature is generated with the ECDSA algorithm as used in Bitcoin, using the SHA2 digest of the document as the payload.
-  #TODO: verify signature, talk about traitys key
 
-  Now, because this document has sensitive data that we might not want to store in the blockchain, we will generate a hash for 
+  Having this signature, we could easily detect if the text was modified or not:
+
+
+  Now, because this document has sensitive data that we might not want to store in the blockchain, we will generate a hash for
   the list of reviews and that is what we will store: `9bd4eda087f1dd60448c808bac0e713e2acf322ee97a02a15dfbcc8fc7145b9f`
 
-  
+
   ### Generating the identifier
-  As we mentioned before, we are using Namecoin's blockchain which can be a used as a key-value data store. From now, we will refer 
+  As we mentioned before, we are using Namecoin's blockchain which can be a used as a key-value data store. From now, we will refer
   to the key as the *identifier* in order to prevent confussions with the private/public key term.
 
   The chosen identifier should accomplish the following points:
@@ -68,17 +70,16 @@
     - Should prevent [squatting](http://en.wikipedia.org/wiki/Cybersquatting)
 
   In order to accomplish the first point, we will use the user Namecoin address as the first part of the identifier.
-  So, by knowing the address which is a public information and does not reveal any private data, we could find 
+  So, by knowing the address which is a public information and does not reveal any private data, we could find
   the list of hashes for a specific user:
    `/namecoind name_filter "MwesPafEAcvxD2cPjMAFMVfpT26Lwkjfpv_*"`
 
   Because the identifier should be idempotent, we should know in advance how it will be calculated. This leads to the problem that
-  someone could generate this identifier in our behalf. This can be solved if this identifier is generated 
-  using certain information that is only known by us like the private key we used to sign the reviews. 
-  So, the second part of the identifier is generated in this way:  
-  `<address> + "_" + hash160("reviews_" + <provider> + "_" + <private_key>)`  
-  which generates the following identifier for the provider 'airbnb' and:  
+  someone could generate this identifier in our behalf. This can be solved if this identifier is generated
+  using certain information that is only known by us like the private key we used to sign the reviews.
+  So, the second part of the identifier is generated in this way:
+  `<address> + "_" + hash160("reviews_" + <provider> + "_" + <private_key>)`
+  which generates the following identifier for the provider 'airbnb' and:
   `MwesPafEAcvxD2cPjMAFMVfpT26Lwkjfpv_67046ab4b5629a1e33993d5570a31cb3075f3a5`
 
-  Eventually, 
-
+  
