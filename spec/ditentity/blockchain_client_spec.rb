@@ -10,6 +10,6 @@ describe Didentity::BlockchainClient do
   end
 
   it {
-    expect(blockchain_client.add_reviews(DUMMY_IDENTIFIER, DUMMY_HASHED_REVIEW)).to eq(DUMMY_NAME_FIRSTUPDATE_RESPONSE)
+    expect(blockchain_client.store_documents(DUMMY_IDENTIFIER, DUMMY_HASHED_REVIEW)).to eq(DUMMY_NAME_FIRSTUPDATE_RESPONSE)
   }
 end

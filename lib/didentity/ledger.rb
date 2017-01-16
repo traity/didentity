@@ -1,104 +1,62 @@
 require 'bitcoin'
+require 'active_support/core_ext/string/inflections'
 
-class Didentity::Ledger
-  REVIEWS_KEY = 'reviews'
+module Didentity
+  class Ledger
+    include Signature
 
-  attr_reader :blockchain_client
+    REVIEWS_KEY     = 'reviews'.freeze
+    TRANSACTION_KEY = 'transaction'.freeze
+    CLAIM_KEY       = 'claim'.freeze
 
-  def initialize(blockchain_client)
-    @blockchain_client = blockchain_client
-  end
+    attr_reader :blockchain_client
 
-  def sign_reviews(reviews, privs)
-    reviews.map { |review| sign_review(review, privs) }
-  end
-
-  def hash_reviews(signed_reviews)
-    validate_signed_reviews(signed_reviews)
-    Digest::SHA2.hexdigest(signed_reviews.to_json)
-  end
-
-  def store_signed_reviews(provider, signed_reviews, user_priv)
-    identifier = reviews_identifier(provider, user_priv)
-    hash       = hash_reviews(signed_reviews)
-    value      = stored_value(hash, user_priv)
-    response   = blockchain_client.add_reviews(identifier, value.to_json)
-    { response: response, identifier: identifier, value: value }
-  end
-
-  def store_reviews(provider, reviews, user_priv, privs = [])
-    privs      = (privs + [user_priv]).uniq
-    hash       = hash_reviews(sign_reviews(reviews, privs))
-    identifier = reviews_identifier(provider, user_priv)
-    value      = stored_value(hash, user_priv)
-    response   = blockchain_client.add_reviews(identifier, value.to_json)
-    { response: response, identifier: identifier, value: value }
-  end
-
-  def reviews_identifier(provider, priv)
-    key              = Bitcoin::Key.new(priv)
-    address          = key.addr
-    hashed_signature = Bitcoin.hash160("#{REVIEWS_KEY}_#{provider}_#{priv}")
-    "#{address}_#{hashed_signature}"
-  end
-
-  def random_priv
-    Bitcoin::Key.generate.priv
-  end
-
-  def address_from_priv(priv)
-    Bitcoin::Key.new(priv).addr
-  end
-
-  private
-  def stored_value(hash, priv)
-    { hash: hash, signature: sign(hash, priv, false) }
-  end
-
-  def sign_review(review, privs)
-    validate_review(review)
-    {
-      'review' => review,
-      'signatures' => signatures(review, privs)
-    }
-  end
-
-  def signatures(review, privs)
-    privs.map do |priv|
-      {
-        'address'   => address_from_private(priv),
-        'signature' => sign(review.to_json, priv)
-      }
+    def initialize(blockchain_client)
+      @blockchain_client = blockchain_client
     end
-  end
 
-  def sign(payload, priv, digest = true)
-    key = Bitcoin::Key.new(priv)
-    payload = Digest::SHA2.hexdigest(payload) if digest
-    key.sign_message(payload)
-  end
+    def store_documents(type, documents, priv_key, priv_keys = [])
+      documents = documents.is_a?(Array) ? documents : [documents]
+      signed_documents = sign_documents(type, documents, priv_keys + [priv_key])
+      hashed_documents = hash_documents(signed_documents)
+      value            = stored_value(hashed_documents, priv_key)
+      identifier       = identifier_for(type, signed_documents, priv_key)
+      response         = blockchain_client.store_documents(identifier, value.to_json)
+      { response: response, identifier: identifier, value: value }
+    end
 
-  def address_from_private(priv)
-    Bitcoin::Key.new(priv).addr
-  end
+    private
 
-  def pub_from_private(priv)
-    Bitcoin::Key.new(priv).priv
-  end
+    def sign_documents(type, documents, priv_keys)
+      signed_documents = documents.map do |document|
+        obj = class_from_type(type).new(document)
+        SignedDocument.new(obj, priv_keys)
+      end
+    end
 
-  def validate_signed_reviews(signed_reviews)
-    signed_reviews.each { |signed_review| validate_signed_review(signed_review) }
-  end
+    def hash_documents(documents)
+      Digest::SHA2.hexdigest(documents.to_json)
+    end
 
-  def validate_signed_review(signed_review)
-    Didentity::SignedReview.new(signed_review).validate!
-  end
+    def stored_value(hash, priv)
+      { hash: hash, signature: sign(hash, priv, false) }
+    end
 
-  def validate_review(review)
-    Didentity::Review.new(review).validate!
-  end
+    def class_from_type(type)
+      "Didentity::#{type.to_s.classify}".constantize
+    end
 
-  def blockchain_client
-    @blockchain_client
+    def identifier_for(type, documents, priv_key)
+      suffix = case type
+      when :review
+        "#{REVIEWS_KEY}_#{priv_key}"
+      when :transaction
+        "#{TRANSACTION_KEY}_#{documents.first.id}"
+      when :claim
+        "#{CLAIM_KEY}_#{documents.first.id}"
+      end
+
+      "#{address_from_private_key(priv_key)}_#{Bitcoin.hash160(suffix)}"
+    end
   end
 end

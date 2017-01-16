@@ -13,3 +13,4 @@
 *.a
 spike.rb
 mkmf.log
+.byebug_history
