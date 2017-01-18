@@ -1,5 +1,6 @@
 require 'json'
 require 'bitcoin'
+require 'active_support/json'
 require_relative './didentity/version'
 
 module Didentity
@@ -11,7 +12,8 @@ module Didentity
   autoload :Claim,            'didentity/models/claim'
   autoload :SignedDocument,   'didentity/models/signed_document'
   autoload :Rating,           'didentity/models/rating'
-  autoload :ModelError,       'didentity/model_error'
+  autoload :Error,            'didentity/error'
+  autoload :ModelError,       'didentity/models/error'
   autoload :NamecoinClient,   'didentity/namecoin_client'
   autoload :BlockchainClient, 'didentity/blockchain_client'
   autoload :Web,              'didentity/web/web'

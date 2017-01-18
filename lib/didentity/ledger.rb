@@ -48,12 +48,14 @@ module Didentity
 
     def identifier_for(type, documents, priv_key)
       suffix = case type
-      when :review
+      when :reviews
         "#{REVIEWS_KEY}_#{priv_key}"
       when :transaction
         "#{TRANSACTION_KEY}_#{documents.first.id}"
-      when :claim
+      when :claims
         "#{CLAIM_KEY}_#{documents.first.id}"
+      else
+        raise "Invalid document type: #{type}"
       end
 
       "#{address_from_private_key(priv_key)}_#{Bitcoin.hash160(suffix)}"

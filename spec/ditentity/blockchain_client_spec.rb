@@ -9,7 +9,7 @@ describe Didentity::BlockchainClient do
     allow(namecoin_client).to receive(:call).with(:name_firstupdate, DUMMY_IDENTIFIER, DUMMY_NAME_NEW_RAND, DUMMY_HASHED_REVIEW).and_return(DUMMY_NAME_FIRSTUPDATE_RESPONSE)
   end
 
-  it {
-    expect(blockchain_client.store_documents(DUMMY_IDENTIFIER, DUMMY_HASHED_REVIEW)).to eq(DUMMY_NAME_FIRSTUPDATE_RESPONSE)
-  }
+  it do
+    expect(blockchain_client.store_documents(DUMMY_IDENTIFIER, DUMMY_HASHED_REVIEW)).to eq(DUMMY_NAME_FIRSTUPDATE_RESPONSE[:result])
+  end
 end

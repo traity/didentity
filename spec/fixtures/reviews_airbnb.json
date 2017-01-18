@@ -11,7 +11,7 @@
     "provider": "traity"
   }],
   "provider" : "airbnb",
-  "version" : "0.1"
+  "format_version" : "0.1"
 },
 {
   "profile" : "https://airbnb.com/users/show/8798625",
@@ -25,5 +25,5 @@
     "provider": "traity"
   }],
   "provider" : "airbnb",
-  "version" : "0.1"
+  "format_version" : "0.1"
 }]

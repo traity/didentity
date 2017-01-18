@@ -28,7 +28,7 @@ describe Didentity::Review do
     end
 
     it 'is not valid without a version' do
-      @review.version = nil
+      @review.format_version = nil
       expect(@review).not_to be_valid
     end
 
@@ -38,7 +38,7 @@ describe Didentity::Review do
     end
 
     it 'is not valid with a version that does not follow the defined pattern' do
-      @review.version = '1..0.0'
+      @review.format_version = '1..0.0'
       expect(@review).not_to be_valid
     end
 

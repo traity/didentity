@@ -1,7 +1,7 @@
 module Didentity
   class Review < Base
-    attr_accessor :created_at, :name, :text, :provider, :profile, :picture, :ratings, :version
-    validates :created_at, :name, :text, :provider, :version, :presence => true
+    attr_accessor :created_at, :name, :text, :provider, :profile, :picture, :ratings
+    validates :created_at, :name, :text, :provider, presence: true
     validates :created_at, numericality: true
     validate  :valid_ratings
 
@@ -13,16 +13,13 @@ module Didentity
     end
 
     def as_json(options = {})
-      {
-        name: name,
-        text: text,
-        provider: provider,
-        profile: profile,
-        picture: picture,
-        ratings: ratings,
-        version: version,
-        created_at: created_at
-      }
+     super(name: name,
+           text: text,
+           provider: provider,
+           profile: profile,
+           picture: picture,
+           ratings: ratings,
+           created_at: created_at)
     end
 
     def valid_ratings

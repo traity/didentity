@@ -15,7 +15,7 @@ describe Didentity::Ledger do
   end
 
   describe 'reviews' do
-    let(:type) { :review }
+    let(:type) { :reviews }
     let(:docs) { load_fixture('reviews_airbnb.json') }
     it_behaves_like 'stored blockchain documents'
   end
@@ -27,8 +27,8 @@ describe Didentity::Ledger do
   end
 
   describe 'claim' do
-    let(:type) { :claim }
-    let(:docs) { load_fixture('claim.json') }
+    let(:type) { :claims }
+    let(:docs) { load_fixture('claims.json') }
     it_behaves_like 'stored blockchain documents'
   end
 
